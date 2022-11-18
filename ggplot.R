@@ -9,17 +9,18 @@ ylibrary(tidyverse)
 if(!require(devtools)) install.packages("devtools")
 devtools::install_github("kassambara/ggpubr")
 
-# replace XXXX with datasheet
-a <- filter(X221026_HIO_ILC2_coculture, experiment=="XXXX")
-b <- filter(X221026_HIO_ILC2_coculture, experiment=="XXXX")
+### FILTER DATASET AS NEEDED:
+# replace XXXX with datasheet, AAAA with a column header, BBBB with a column value to be filtered.
+a <- filter(XXXX, AAAA=="BBBB")
+b <- filter(XXXX, AAAA=="BBBB")
 
 
+
+### CREATE A SCATTERPLOT WITH A BAR SHOWING THE MEDIAN, AS WELL AS SEM WHISKERS:
 # replace XXXXXXXXXXXXX with dataset for x axis
 # replace YYYYYYYYYYYYYYY with dataset for x axis
 # replace CCCCCCCCCCCCC with dataset to colorcode
-ggplot(X221026_HIO_ILC2_coculture, aes(x = XXXXXXXXXXXXX, 
-                                       y = YYYYYYYYYYYYY, 
-                                       color= CCCCCCCCCCCCC )) +
+ggplot(X221026_HIO_ILC2_coculture, aes(x = XXXXXXXXXXXXX, y = YYYYYYYYYYYYY, color= CCCCCCCCCCCCC )) +
   geom_jitter(size = 2, width = 0.1)+
   #geom_point(width = 0.5, position = position_dodge(0.7), stat = "summary", color="condition")+
   #remove # above for geom point
@@ -42,7 +43,6 @@ ggplot(X221026_HIO_ILC2_coculture, aes(x = XXXXXXXXXXXXX,
                geom = "errorbar", width = 0.3, color = "black", size = 0.4,
                fun.max = function(x) median(x) + sd(x) / sqrt(length(x)),
                fun.min = function(x) median(x) - sd(x) / sqrt(length(x)))+
-  stat_compare_means(comparisons = list(c("AAAAAAAAAAA","BBBBBBBBB"),
-                                        c("BBBBBBBBBB","CCCCCCCCCC")
-  ))
+  stat_compare_means(comparisons = list(c("KKKKK","FFFFF"),
+                                        c("KKKKK","GGGGG") ))
 
