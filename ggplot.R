@@ -16,12 +16,16 @@ b <- filter(XXXX, AAAA=="BBBB")
 
 
 
+
+
 ### CREATE A SCATTERPLOT WITH A BAR SHOWING THE MEDIAN, AS WELL AS SEM WHISKERS:
 # replace XXXXXXXXXXXXX with dataset for x axis
 # replace YYYYYYYYYYYYYYY with dataset for x axis
 # replace CCCCCCCCCCCCC with dataset to colorcode
 ggplot(X221026_HIO_ILC2_coculture, aes(x = XXXXXXXXXXXXX, y = YYYYYYYYYYYYY, color= CCCCCCCCCCCCC )) +
   geom_jitter(size = 2, width = 0.1)+
+  geom_bar(aes(x=population, y=n_cells_counted, fill = condition), stat = "identity", position = "dodge")+
+      #grouped bar chart
   #geom_point(width = 0.5, position = position_dodge(0.7), stat = "summary", color="condition")+
   #remove # above for geom point
   #geom_smooth(position = "identity", stat="smooth", method = "loess", span = 1, level=0, size = 1)+
@@ -38,6 +42,8 @@ ggplot(X221026_HIO_ILC2_coculture, aes(x = XXXXXXXXXXXXX, y = YYYYYYYYYYYYY, col
   scale_fill_manual(values = c("#567079", "#909e5a", "#CF6900", "#873e62","#9A2E09", "#2C465D" , "#3B5530", "#361E2E","#500909", "#13242D", "#2A381D", "#A6314E", "#CF6970" ))+
   scale_color_manual(values = c("#567079", "#909e5a", "#CF6900", "#873e62","#9A2E09", "#2C465D" , "#3B5530", "#361E2E","#500909", "#13242D", "#2A381D", "#A6314E", "#CF6970"  ))+
   labs(y= " ", x = " ")+
+  ylim ()+
+  # or use coord_cartesian(ylim = c(0.001,0.003)) to zoom into area of the plot
   stat_summary(fun = "median", geom = "bar", fill = "transparent", color = "black", width= 0.4, size = 0.3)+
   stat_summary(fun = median,
                geom = "errorbar", width = 0.3, color = "black", size = 0.4,
@@ -46,3 +52,8 @@ ggplot(X221026_HIO_ILC2_coculture, aes(x = XXXXXXXXXXXXX, y = YYYYYYYYYYYYY, col
   stat_compare_means(comparisons = list(c("KKKKK","FFFFF"),
                                         c("KKKKK","GGGGG") ))
 
+
+
+facet_grid(YYYYY ~ XXXXX)
+#to plot several graphs ordered by the attribute YYYYY on the y axis of the grid and XXXXX on the x axis of the grid
+# add : strip.background = element_blank()      to theme to remove grey box
